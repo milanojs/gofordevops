@@ -1,0 +1,7 @@
+---
+credentials:
+  username: username
+  password: secretpassword
+webserver:
+  name: Google Server
+  endpoint: https://www.google.com
