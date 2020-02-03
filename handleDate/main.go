@@ -20,10 +20,10 @@ func main() {
 
 	daystil := int(diff.Hours() / 24)
 
-	if daystil > 0 {
-		fmt.Println("es la fecha actual %d", int(diff.Hours()/24))
+	if daystil >= 0 {
+		fmt.Printf("es la fecha actual %d\n", int(diff.Hours()/24))
 	} else {
-		fmt.Println("no es la fecha actual dias til", daystil)
+		fmt.Printf("no es la fecha actual dias til %d\n", daystil)
 	}
 
 	if now.After(futureDate) {
