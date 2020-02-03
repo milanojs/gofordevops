@@ -63,6 +63,7 @@ var postCmd = &cobra.Command{
 		client := http.Client{}
 		var contentReader io.Reader
 		content := viper.GetString("content")
+
 		if content != "" {
 			contentReader = bytes.NewReader([]byte(content))
 		}
@@ -84,11 +85,11 @@ var postCmd = &cobra.Command{
 		}
 		defer resp.Body.Close()
 
-		respcontent, err := ioutil.ReadAll(resp.Body)
+		respContent, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
 			log.Fatalln("Unable to read body")
 		}
-		fmt.Println(string(respcontent))
+		fmt.Println(string(respContent))
 	},
 }
 
@@ -97,10 +98,10 @@ func main() {
 		viper.GetString("credentials.username"), "Username for credentials")
 	cmd.PersistentFlags().StringP("password", "p",
 		viper.GetString("credentials.username"), "password for credentials")
-	viper.BindPFlag("username", cmd.PersistentFlags.Lookup("username"))
-	viper.BindPFlag("password", cmd.PersistentFlags.Lookup("password"))
-	postCmd.PersistentFlags().StringVarP(&content, "content", "c", "", "The content for post")
-	viper.BindPFlag("content", cmd.PersistentFlags.Lookup("content"))
+	viper.BindPFlag("username", cmd.PersistentFlags().Lookup("username"))
+	viper.BindPFlag("password", cmd.PersistentFlags().Lookup("password"))
+	postCmd.PersistentFlags().StringP("content", "c", "", "The content for post")
+	viper.BindPFlag("content", cmd.PersistentFlags().Lookup("content"))
 	cmd.AddCommand(getCmd)
 	cmd.AddCommand(postCmd)
 	cmd.Execute()
