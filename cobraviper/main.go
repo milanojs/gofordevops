@@ -9,6 +9,7 @@ import (
 	"net/http"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var cmd = &cobra.Command{
@@ -28,6 +29,9 @@ var getCmd = &cobra.Command{
 		}
 		client := http.Client{}
 		req, err := http.NewRequest("GET", args[0], nil)
+
+		username := viper.GetString("username")
+		password := viper.GetString("password")
 
 		if err != nil {
 			log.Fatalln("Unable to get request")
@@ -58,6 +62,7 @@ var postCmd = &cobra.Command{
 		}
 		client := http.Client{}
 		var contentReader io.Reader
+		content := viper.GetString("content")
 		if content != "" {
 			contentReader = bytes.NewReader([]byte(content))
 		}
@@ -66,6 +71,10 @@ var postCmd = &cobra.Command{
 		if err != nil {
 			log.Fatalln("Unable to post request")
 		}
+
+		username := viper.GetString("username")
+		password := viper.GetString("password")
+
 		if username != "" && password != "" {
 			req.SetBasicAuth(username, password)
 		}
@@ -75,20 +84,29 @@ var postCmd = &cobra.Command{
 		}
 		defer resp.Body.Close()
 
-		content, err := ioutil.ReadAll(resp.Body)
+		respcontent, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
 			log.Fatalln("Unable to read body")
 		}
-		fmt.Println(string(content))
+		fmt.Println(string(respcontent))
 	},
 }
-var username, password, content string
 
 func main() {
-	cmd.PersistentFlags().StringVarP(&username, "username", "u", "", "Username for credentials")
-	cmd.PersistentFlags().StringVarP(&password, "password", "p", "", "password for credentials")
+	cmd.PersistentFlags().StringP("username", "u",
+		viper.GetString("credentials.username"), "Username for credentials")
+	cmd.PersistentFlags().StringP("password", "p",
+		viper.GetString("credentials.username"), "password for credentials")
+	viper.BindPFlag("username", cmd.PersistentFlags.Lookup("username"))
+	viper.BindPFlag("password", cmd.PersistentFlags.Lookup("password"))
 	postCmd.PersistentFlags().StringVarP(&content, "content", "c", "", "The content for post")
+	viper.BindPFlag("content", cmd.PersistentFlags.Lookup("content"))
 	cmd.AddCommand(getCmd)
 	cmd.AddCommand(postCmd)
 	cmd.Execute()
+}
+func init() {
+	viper.AddConfigPath(".")
+	viper.SetConfigName("cobra")
+	viper.ReadInConfig()
 }
