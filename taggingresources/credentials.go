@@ -71,4 +71,5 @@ func (e *EnvProvider) Retrieve() (Value, error) {
 func (e *EnvProvider) IsExpired() bool {
 	return !e.retrieved
 }
-xxx
+x
+nueva linea
