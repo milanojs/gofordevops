@@ -1,0 +1,11 @@
+//
+// In GraphQL's type system shorthand notation.
+// (See: http://graphql.org/docs/typesystem)
+//
+type Post {
+	id:   ID!
+	text: String
+  }
+  type Query {
+	latestPost: Post
+  }
