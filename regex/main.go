@@ -49,7 +49,6 @@ func GivenExpresults(arr []string, str string) (bool, error) {
 		if matched == true {
 			fmt.Printf(" has aws in *%v* - %v\n", a, matched)
 			continue
-
 		}
 	}
 	return false, nil
