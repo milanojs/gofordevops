@@ -6,6 +6,8 @@ import (
 	"text/template"
 )
 
+//https://blog.gopheracademy.com/advent-2017/using-go-templates/
+// Todo
 type Todo struct {
 	Name        string
 	Description string
