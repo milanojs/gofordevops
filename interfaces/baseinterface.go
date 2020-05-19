@@ -1,6 +1,4 @@
-//Basic simple interface in golang
-
-package main
+package baseinterface
 
 import "fmt"
 
