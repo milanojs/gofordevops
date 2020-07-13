@@ -1,13 +1,13 @@
 package weather_provider
 
 import (
-	"interface-testing/api/clients/restclient"
-	"interface-testing/api/domain/weather_domain"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"strings"
 	"testing"
+	"testing_mock/api/clients/restclient"
+	"testing_mock/api/domain/weather_domain"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -1,8 +1,8 @@
 package services
 
 import (
-	"interface-testing/api/domain/weather_domain"
-	"interface-testing/api/providers/weather_provider"
+	"testing_mock/api/domain/weather_domain"
+	"testing_mock/api/providers/weather_provider"
 )
 
 type weatherService struct{}
