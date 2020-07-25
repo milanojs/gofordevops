@@ -3,11 +3,12 @@ package weather_provider
 import (
 	"encoding/json"
 	"fmt"
-	"testing_mock/api/clients/restclient"
-	"testing_mock/api/domain/weather_domain"
 	"io/ioutil"
 	"log"
 	"net/http"
+
+	"github.com/milanojs/gofordevops/testing_mock/api/clients/restclient"
+	"github.com/milanojs/gofordevops/testing_mock/api/domain/weather_domain"
 )
 
 const (

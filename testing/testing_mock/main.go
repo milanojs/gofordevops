@@ -1,10 +1,8 @@
 package main
 
-import (
-	"testing_mock/api/app"
-)
+import "testing_mock/api/app"
 
-func main(){
+func main() {
 
 	app.RunApp()
 
